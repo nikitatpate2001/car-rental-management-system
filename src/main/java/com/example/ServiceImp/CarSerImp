@@ -1,0 +1,49 @@
+package com.example.serviceImp;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.entity.Car;
+import com.example.exception.CarNotFoundException;
+import com.example.repo.CarRepo;
+import com.example.service.CarService;
+@Service
+public class CarSerImp implements CarService{
+
+	@Autowired
+	CarRepo cr;
+	@Override
+	public Car addCar(Car car) {
+		// TODO Auto-generated method stub
+		return cr.save(car);
+	}
+
+	@Override
+	public Car getCarById(int id) {
+		// TODO Auto-generated method stub
+		
+		return cr.findById(id).orElseThrow(()->new CarNotFoundException("car not found"+id));
+	}
+
+	@Override
+	public Car updateCar(Car car) {
+		// TODO Auto-generated method stub
+		cr.findById(car.getCarId()).orElseThrow(()->new CarNotFoundException("car not found"+car.getCarId()));
+		return cr.save(car);
+	}
+
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		cr.deleteById(id);
+	}
+
+	@Override
+	public List<Car> getCar() {
+		// TODO Auto-generated method stub
+		return cr.findAll();
+	}
+
+}
