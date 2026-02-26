@@ -1,0 +1,15 @@
+package com.example.service;
+
+import java.util.List;
+
+import com.example.entity.Car;
+
+public interface CarService {
+	
+	public Car addCar(Car car);
+	public List<Car> getCar();
+	public Car getCarById(int id);
+	public Car updateCar(Car car);
+	public void delete(int id);
+	
+}
